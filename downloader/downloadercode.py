@@ -106,20 +106,26 @@ for k, p in aktortypefeed.iteritems():
 
 
 # Graph Creation and Plotting
+    import networkx as nx
+    G=nx.Graph()
     aktorlist = []
 
     
     for b in aktoraktor.objects.all():
-    if (b.tilaktorid == 1):
-        aktorlist.append(b.fraaktorid)
+        if (b.tilaktorid == 1):
+            aktorlist.append(b.fraaktorid)
 
     
     for f in aktorlist:
-    for q in aktor.objects.all():
-        if (f == q.aktorid):
-            print q.navn
-            
+        for q in aktor.objects.all():
+            if (f == q.aktorid):
+                print q.navn
+                
 uhh = aktor.objects.filter(aktorid__in=aktorlist)
+
+for nodes in aktoraktor.objects.filter(aktorid=1):
+    G.add_node(nodes.aktorid, navn= nodes.navn)
+
 
 for nodes in aktor.objects.filter(aktorid=1):
     G.add_node(nodes.aktorid, navn= nodes.navn)
@@ -135,22 +141,49 @@ for t in aktoraktor.objects.all():
         G.add_node(tonode[0].aktorid, navn=tonode[0].navn)
         G.add_edge(t.fraaktorid,t.tilaktorid)
 
+
 import matplotlib.pyplot as plt
 
+
+
+nx.draw(G)
+pos=nx.spring_layout(G)
 labels=dict((n,d['navn']) for n,d in G.nodes(data=True))
-
- nx.draw(G)
-
- nx.draw_networkx_labels(G,pos,labels,font_size=8)
-  pos=nx.spring_layout(G)
-
+nx.draw_networkx_labels(G,pos,labels,font_size=6)
 plt.axis('off')
 
-plt.savefig("labels_and_colors.png")
+plt.savefig("MPsandCommittees.png")
 
 
+#Find all MPs (rolleid = 15) and make edges based off of aktoraktor table
+
+#MPconnections = aktoraktor.objects.filter(rolleid=15)
+
+#MPconndict = dict((d.fraaktorid,d.tilaktorid) for  d in MPconnections.all() )
 
 
+commitees =  aktor.objects.filter(typeid=3)
+MPs = 
+
+for t in aktoraktor.objects.filter(rolleid=15,  slutdato=None):
+     fromnode = aktor.objects.filter(aktorid=t.fraaktorid)[0]
+     tonode = aktor.objects.filter(aktorid=t.tilaktorid)[0]
+     if (fromnode.typeid == 3)  and (tonode.typeid == 5) :
+            for roller in aktoraktor.objects.filter(tilaktorid=tonode.aktorid):
+                if (roller.rolleid = 15):
+                    G.add_node(fromnode.aktorid, navn=fromnode.navn)
+                    G.add_node(tonode.aktorid, navn=tonode.navn)
+                    G.add_edge(fromnode.aktorid,tonode.aktorid)
+                    break
+
+            
+nx.draw(G)
+pos=nx.spring_layout(G)
+labels=dict((n,d['navn']) for n,d in G.nodes(data=True))
+nx.draw_networkx_labels(G,pos,labels,font_size=6)
+plt.axis('off')
+
+plt.savefig("MPsandCommittees.png")
 
 
 
