@@ -155,7 +155,7 @@ plt.axis('off')
 plt.savefig("MPsandCommittees.png")
 
 
-#Find all MPs (rolleid = 15) and make edges based off of aktoraktor table
+#Find all MPs (rolleid = 15) and make edges to Folketinget
 
 #MPconnections = aktoraktor.objects.filter(rolleid=15)
 
@@ -168,23 +168,87 @@ MPs =
 for t in aktoraktor.objects.filter(rolleid=15,  slutdato=None):
      fromnode = aktor.objects.filter(aktorid=t.fraaktorid)[0]
      tonode = aktor.objects.filter(aktorid=t.tilaktorid)[0]
-     if (fromnode.typeid == 3)  and (tonode.typeid == 5) :
-            for roller in aktoraktor.objects.filter(tilaktorid=tonode.aktorid):
-                if (roller.rolleid = 15):
-                    G.add_node(fromnode.aktorid, navn=fromnode.navn)
-                    G.add_node(tonode.aktorid, navn=tonode.navn)
-                    G.add_edge(fromnode.aktorid,tonode.aktorid)
-                    break
-
+     if (fromnode.typeid == 11 and fromnode.periodeid==32)  and (tonode.typeid == 5)  :
+            G.add_node(fromnode.aktorid, navn=fromnode.navn)
+            G.add_node(tonode.aktorid, navn=tonode.navn)
+            G.add_edge(fromnode.aktorid,tonode.aktorid)
             
-nx.draw(G)
+
+                        for roller in aktoraktor.objects.filter(tilaktorid=tonode.aktorid):
+                if (roller.rolleid == 15):
+             
+      
+plt.clf()      
+plt.figure(figsize=(10, 10))
+labels=dict((n,d['navn']) for n,d in I.nodes(data=True))                    
+nx.draw_random(I, with_labels=True, labels=labels, alpha=0.6, edge_color='g', style='dotted')
+
+plt.axis('off')
+
+plt.savefig("MPsandCom128.png")
+
+
+
 pos=nx.spring_layout(G)
 labels=dict((n,d['navn']) for n,d in G.nodes(data=True))
 nx.draw_networkx_labels(G,pos,labels,font_size=6)
-plt.axis('off')
-
-plt.savefig("MPsandCommittees.png")
 
 
 
+# 
 
+from sets import  Set
+ G=nx.DiGraph()
+
+MPs = []
+MPids = []
+coms = []
+comsid = []
+for t in aktoraktor.objects.filter(rolleid=15,  slutdato=None):
+    fromnode = aktor.objects.filter(aktorid=t.fraaktorid)[0]
+    tonode = aktor.objects.filter(aktorid=t.tilaktorid)[0]
+    if (fromnode.typeid == 3 and fromnode.periodeid==32)  and (tonode.typeid == 5)  :
+        coms.append(fromnode)
+        comsid.append(fromnode.aktorid)
+    
+    
+        tilaktorid__in=MPids
+        
+for t in aktoraktor.objects.filter(rolleid=15,  slutdato=None):
+    fromnode = aktor.objects.filter(aktorid=t.fraaktorid)[0]
+    tonode = aktor.objects.filter(aktorid=t.tilaktorid)[0]
+    if (fromnode.typeid == 11 and fromnode.periodeid==32)  and (tonode.typeid == 5)  :
+    MPs.append(tonode)
+    MPids.append(tonode.aktorid)
+    print tonode.navn
+    
+for t in aktoraktor.objects.filter(tilaktorid__in=MPids, fraaktorid__in=comsid,   slutdato=None):
+    fromnode = aktor.objects.filter(aktorid=t.fraaktorid)[0]
+    tonode = aktor.objects.filter(aktorid=t.tilaktorid)[0]
+    G.add_node(fromnode.aktorid, navn=fromnode.navn)
+    G.add_node(tonode.aktorid, navn=tonode.navn)
+    G.add_edge(fromnode.aktorid,tonode.aktorid)
+
+for t in aktoraktor.objects.filter(,  rolleid=):
+    
+    
+
+subgraphs
+
+names = []
+for o in coms:
+    names.append((o.aktorid, o.navn))
+
+na=dict((n,d) for n,d in names)      
+
+for p in comsid:
+    H= dfs_tree(G,p)
+    I=G.subgraph(H.nodes())
+    plt.clf()      
+    plt.figure(figsize=(10, 10))
+    labels=dict((n,d['navn']) for n,d in I.nodes(data=True))                    
+    nx.draw_spring(I, with_labels=True, labels=labels, alpha=0.6, edge_color='g', style='dotted')
+    plt.axis('off')
+    plt.savefig("Udvalg-" + na[p] + "-" + str(p) + ".png")
+
+    
