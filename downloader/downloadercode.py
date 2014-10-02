@@ -233,7 +233,7 @@ for t in aktoraktor.objects.filter(,  rolleid=):
     
     
 
-subgraphs
+from networkx.algorithms.traversal.depth_first_search import dfs_tree
 
 names = []
 for o in coms:
