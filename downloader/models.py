@@ -31,15 +31,17 @@ class aktoraktor(models.Model):
 
 class aktoraktorrolle(models.Model):
     
-    id = models.IntegerField(primary_key=True)
-    rolle = models.CharField(max_length=200)
-    opdateringsdato = models.DateTimeField()
+    id = models.AutoField(primary_key=True)
+    aktoraktorrolleid = models.IntegerField(null=True, blank=True)
+    rolle = models.CharField(max_length=200, null=True, blank=True)
+    opdateringsdato = models.DateTimeField(null=True, blank=True)
 
 
 
 class aktortype(models.Model):
     
-    id = models.IntegerField(primary_key=True)
-    type = models.CharField(max_length=200)
-    opdateringsdato = models.DateTimeField()
+    id = models.AutoField(primary_key=True)
+    aktortypeid = models.IntegerField(null=True, blank=True)
+    type = models.CharField(max_length=200, null=True, blank=True)
+    opdateringsdato = models.DateTimeField(null=True, blank=True)
 

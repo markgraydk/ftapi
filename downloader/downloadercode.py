@@ -56,6 +56,56 @@ for k, p in aktoraktorfeed.iteritems():
     aktoraktor.objects.create(aktoraktorid=aktoraktorid,  fraaktorid=fraaktorid, tilaktorid=tilaktorid,   slutdato=slutdato,  startdato=startdato, rolleid=rolleid, )
     
     
+#class aktoraktorrolle(models.Model):
+#    
+#    id = models.AutoField(primary_key=True)
+#    aktoraktorrolleid = models.IntegerField(null=True, blank=True)
+#    rolle = models.CharField(max_length=200, null=True, blank=True)
+#    opdateringsdato = models.DateTimeField(null=True, blank=True)
+
+
+# u'Akt\xf8rAkt\xf8rRolle'
+
+aktoraktorrollefeed = c.feeds[u'Akt\xf8rAkt\xf8rRolle'].OpenCollection()   
+
+for k, p in aktoraktorrollefeed.iteritems():
+    aktoraktorrolleid=p['id'].value
+    rolle=p['rolle'].value
+    if (p['opdateringsdato']== None):
+        opdateringsdato=None
+    else:
+        opdateringsdato=p['opdateringsdato'].value.GetCalendarString()
+        
+    print k,  aktoraktorrolleid,  rolle,  opdateringsdato
+    aktoraktorrolle.objects.create(aktoraktorrolleid=aktoraktorrolleid,  rolle=rolle,  opdateringsdato=opdateringsdato)
+
+
+
+#class aktortype(models.Model):
+#    
+#    id = models.AutoField(primary_key=True)
+#    aktortypeid = models.IntegerField(primary_key=True)
+#    type = models.CharField(max_length=200, null=True, blank=True)
+#    opdateringsdato = models.DateTimeField(null=True, blank=True)
+
+    
+aktortypefeed = c.feeds[u'Akt\xf8rtype'].OpenCollection()   
+
+for k, p in aktortypefeed.iteritems():
+    aktortypeid=p['id'].value
+    type=p['type'].value
+    if (p['opdateringsdato']== None):
+        opdateringsdato=None
+    else:
+        opdateringsdato=p['opdateringsdato'].value.GetCalendarString()
+        
+    print k,  aktortypeid,  type,  opdateringsdato
+    aktortype.objects.create(aktortypeid=aktortypeid,  type=type,  opdateringsdato=opdateringsdato)
+    
+
+
+
+# Graph Creation and Plotting
     aktorlist = []
 
     
@@ -68,11 +118,8 @@ for k, p in aktoraktorfeed.iteritems():
     for q in aktor.objects.all():
         if (f == q.aktorid):
             print q.navn
-
-    
-    
-    uhh = aktor.objects.filter(aktorid__in=aktorlist)
-
+            
+uhh = aktor.objects.filter(aktorid__in=aktorlist)
 
 for nodes in aktor.objects.filter(aktorid=1):
     G.add_node(nodes.aktorid, navn= nodes.navn)
@@ -100,3 +147,11 @@ labels=dict((n,d['navn']) for n,d in G.nodes(data=True))
 plt.axis('off')
 
 plt.savefig("labels_and_colors.png")
+
+
+
+
+
+
+
+
