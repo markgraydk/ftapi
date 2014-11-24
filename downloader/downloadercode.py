@@ -179,13 +179,13 @@ for t in aktoraktor.objects.filter(rolleid=15,  slutdato=None):
              
       
 plt.clf()      
-plt.figure(figsize=(10, 10))
-labels=dict((n,d['navn']) for n,d in I.nodes(data=True))                    
-nx.draw_random(I, with_labels=True, labels=labels, alpha=0.6, edge_color='g', style='dotted')
+plt.figure(figsize=(40, 40))
+labels=dict((n,d['navn']) for n,d in G2.nodes(data=True))                    
+nx.draw_shell(G2, with_labels=True, labels=labels, alpha=0.6, edge_color='g', style='dotted')
 
 plt.axis('off')
 
-plt.savefig("MPsandCom128.png")
+plt.savefig("limited.png")
 
 
 
@@ -198,7 +198,7 @@ nx.draw_networkx_labels(G,pos,labels,font_size=6)
 # 
 
 from sets import  Set
- G=nx.DiGraph()
+G=nx.DiGraph()
 
 MPs = []
 MPids = []
@@ -217,10 +217,10 @@ for t in aktoraktor.objects.filter(rolleid=15,  slutdato=None):
 for t in aktoraktor.objects.filter(rolleid=15,  slutdato=None):
     fromnode = aktor.objects.filter(aktorid=t.fraaktorid)[0]
     tonode = aktor.objects.filter(aktorid=t.tilaktorid)[0]
-    if (fromnode.typeid == 11 and fromnode.periodeid==32)  and (tonode.typeid == 5)  :
-    MPs.append(tonode)
-    MPids.append(tonode.aktorid)
-    print tonode.navn
+    if (fromnode.typeid == 11 and fromnode.periodeid==32)  and (tonode.typeid == 5):
+        MPs.append(tonode)
+        MPids.append(tonode.aktorid)
+        print tonode.navn
     
 for t in aktoraktor.objects.filter(tilaktorid__in=MPids, fraaktorid__in=comsid,   slutdato=None):
     fromnode = aktor.objects.filter(aktorid=t.fraaktorid)[0]
@@ -251,4 +251,69 @@ for p in comsid:
     plt.axis('off')
     plt.savefig("Udvalg-" + na[p] + "-" + str(p) + ".png")
 
+
+#concentric circles
+names = []
+for o in coms:
+    names.append((o.aktorid, o.navn))
+
+na=dict((n,d) for n,d in names)      
+
+nlist = []
+for p in comsid:
+    nlist.append(dfs_tree(G,p).nodes())
     
+    
+
+plt.clf()      
+plt.figure(figsize=(40, 40))
+labels=dict((n,d['navn']) for n,d in G.nodes(data=True))                    
+nx.draw_shell(G, with_labels=True, labels=labels, alpha=0.6, edge_color='g', style='dotted', nlist=nlist)
+
+plt.axis('off')
+
+plt.savefig("concentri.png")
+    
+
+
+def remove_edges(g, in_degree=1, out_degree=1):
+    g2=g.copy()
+    d_in=g2.in_degree(g2)
+    d_out=g2.out_degree(g2)
+    print(d_in)
+    print(d_out)
+    for n in g2.nodes():
+        if d_in[n]==in_degree and d_out[n] == out_degree: 
+            g2.remove_node(n)
+    return g2
+
+
+def remove_edges2(g, in_degree=1, out_degree=1):
+    g2=g.copy()
+    d_in=g2.in_degree(g2)
+    d_out=g2.out_degree(g2)
+    print(d_in)
+    print(d_out)
+    for n in g2.nodes():
+        if d_in[n]<=in_degree and d_out[n] <= out_degree: 
+            g2.remove_node(n)
+    return g2
+
+plt.clf()      
+plt.figure(figsize=(40, 40))
+labels=dict((n,d['navn']) for n,d in G2.nodes(data=True))                    
+nx.draw_shell(G2, with_labels=True, labels=labels, alpha=0.6, edge_color='g', style='dotted')
+
+plt.axis('off')
+
+plt.savefig("limited.png")
+
+
+for node in G.nodes():
+    temp = r'{"name": "' + G.node[node]['navn'] + r'"' + r',"size":1, "imports":['
+    for edge in G.edge[node]:
+        temp = temp + r'"' + G.node[edge]['navn'] + r'",'
+    temp = temp + r']},'
+    d3strlist.append(temp)
+
+

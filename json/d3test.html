@@ -1,0 +1,236 @@
+<html>
+<head></head>
+
+<body>
+<script type="text/javascript" src="d3/d3.js"></script>
+<script>
+nodes = [{"name": "Finansudvalget","size":1, "imports":["Mike Legarth","Jesper Petersen","René Christensen","Ole Birk Olesen","Frank Aaen","Rasmus Prehn","Thomas Jensen","Jacob Jensen","Claus Hjort Frederiksen","Kristian Thulesen Dahl","Simon Kollerup","Camilla Hersom","Jonas Dahl","Peter Christensen","Finn Sørensen","Kristian Jensen","Ane Halsboe-Jørgensen"]},
+{"name": "Frank Aaen","size":1, "imports":[]},
+{"name": "Forsvarsudvalget","size":1, "imports":["John Dyrby Paulsen","Ole Hækkerup","Karsten Lauritzen","Lone Loklindt","Nadeem Farooq","Holger K. Nielsen","Søren Espersen","Doris Jakobsen","Christian Juhl","Jacob Lund","Hans Christian Thoning","Peter Juel Jensen","Annette Lind","Jakob Engel-Schmidt","Zenia Stampe","Karsten Nonbo","Kristian Pihl Lorentzen","Nikolaj Villumsen","Martin Henriksen","Marie Krarup","Jakob Ellemann-Jensen","Hans Kristian Skibby","Troels Lund Poulsen","Jørgen Arbo-Bæhr","Trine Mach","Leif Mikkelsen","Trine Bramsen"]},
+{"name": "Grønlandsudvalget","size":1, "imports":["Eva Kjer Hansen","Helle Løvgreen Mølvig","Claus Hjort Frederiksen","Per Stig Møller","Villum Christensen","Torben Hansen","Søren Espersen","Ellen Trane Nørby","Doris Jakobsen","Christian Juhl","Nadeem Farooq","Annette Vilhelmsen","Flemming Damgaard Larsen","Karsten Nonbo","Martin Henriksen","Thomas Jensen","Kristian Thulesen Dahl","Marie Krarup","Jakob Ellemann-Jensen","Birgitte Josefsen","Özlem Sara Cekic","Finn Sørensen","Flemming Møller Mortensen","Uffe Elbæk","Astrid Krag","Orla Hav","Kim Andersen"]},
+{"name": "Børne- og Undervisningsudvalget","size":1, "imports":["Lene Espersen","Rasmus Horn Langhoff","Alex Ahrendtsen","Tina Nedergaard","Finn Thranum","Ane Halsboe-Jørgensen","Lars Dohn","Anni Matthiesen","Henning Hyllested","Jens Ejner Christensen","Peter Juel Jensen","Annette Lind","Bent Bøgsted","Julie Skovsby","Thyra Frank","Martin Henriksen","Karen Ellemann","Merete Riisager","Jeppe Mikkelsen","Marie Krarup","Troels Ravn","Marlene Borst Hansen","Louise Schack Elholm","Trine Mach","Rosa Lund","Lotte Rod","Annette Vilhelmsen","Orla Hav"]},
+{"name": "Alex Ahrendtsen","size":1, "imports":[]},
+{"name": "Europaudvalget","size":1, "imports":["Sophie Løhde","Esben Lunde Larsen","Mette Bock","Eva Kjer Hansen","Claus Hjort Frederiksen","Lars Barfoed","Ida Auken","Per Stig Møller","Holger K. Nielsen","Per Clausen","Jacob Lund","Erling Bonnesen","Nadeem Farooq","Zenia Stampe","Nikolaj Villumsen","Thomas Jensen","Christian Langballe","Jakob Ellemann-Jensen","Jens Joel","Jeppe Bruus","Finn Sørensen","Mikkel Dencker","Lisbeth Bech Poulsen","Morten Bødskov","Pia Adelsteen","Henrik Høegh","René Christensen","Trine Bramsen"]},
+{"name": "Udenrigsudvalget","size":1, "imports":["Søren Pind","John Dyrby Paulsen","Mette Bock","Frank Aaen","Karsten Lauritzen","Per Stig Møller","Lone Loklindt","Ane Halsboe-Jørgensen","Esben Lunde Larsen","Liv Holm Andersen","Søren Espersen","Ellen Trane Nørby","Christian Juhl","Jacob Lund","Jens Ejner Christensen","Peter Juel Jensen","Zenia Stampe","Nikolaj Villumsen","Mette Gjerskov","Holger K. Nielsen","Jakob Ellemann-Jensen","Mads Rørvig","Hans Kristian Skibby","Peter Skaarup","Jeppe Bruus","Morten Bødskov","Pia Adelsteen","Henrik Dam Kristensen","Trine Mach"]},
+{"name": "Skatteudvalget","size":1, "imports":["Frank Aaen","Thomas Danielsen","Ane Halsboe-Jørgensen","John Dyrby Paulsen","Karina Adsbøl","Hans Andersen","Astrid Krag","Pernille Rosenkrantz-Theil","Jacob Jensen","Nadeem Farooq","Kristian Pihl Lorentzen","Nikolaj Villumsen","Thomas Jensen","Troels Lund Poulsen","Torsten Schack Pedersen","Mads Rørvig","Hans Kristian Skibby","Brian Mikkelsen","Mikkel Dencker","Lisbeth Bech Poulsen","Jesper Petersen","Ole Birk Olesen","Jan E. Jørgensen","Simon Kollerup","Trine Mach","Lotte Rod","Dennis Flydtkjær","Stine Brix"]},
+{"name": "Retsudvalget","size":1, "imports":["Marlene Borst Hansen","Rasmus Prehn","Johanne Schmidt-Nielsen","Karsten Lauritzen","Doris Jakobsen","Henning Hyllested","Peter Skaarup","Inger Støjberg","Julie Skovsby","Zenia Stampe","Karsten Nonbo","Kristian Pihl Lorentzen","Pernille Vigsø Bagge","Pernille Skipper","Tom Behnke","Mette Reissmann","Jeppe Mikkelsen","Jeppe Bruus","Pia Adelsteen","Astrid Krag","Jan E. Jørgensen","Karen Jespersen","Simon Emil Ammitzbøll","Trine Bramsen","Dennis Flydtkjær","Karina Lorentzen Dehnhardt","Kim Christiansen","Kim Andersen","Preben Bang Henriksen"]},
+{"name": "Karsten Lauritzen","size":1, "imports":[]},
+{"name": "Erhvervs-, Vækst- og Eksportudvalget","size":1, "imports":["Anne-Mette Winther Christiansen","Frank Aaen","Mette Hjermind Dencker","Ida Auken","Michael Aastrup Jensen","Hans Christian Thoning","Jakob Engel-Schmidt","Julie Skovsby","Thomas Jensen","Mette Reissmann","Jeppe Mikkelsen","Torsten Schack Pedersen","Hans Kristian Skibby","Brian Mikkelsen","Nadeem Farooq","Lisbeth Bech Poulsen","Uffe Elbæk","Ole Sohn","Anne Sina","Joachim B. Olsen","Trine Bramsen","Dennis Flydtkjær","Stine Brix","Kim Christiansen","Hans Christian Schmidt","Kim Andersen","Preben Bang Henriksen"]},
+{"name": "Holger K. Nielsen","size":1, "imports":[]},
+{"name": "Søren Espersen","size":1, "imports":[]},
+{"name": "Sundheds- og Forebyggelsesudvalget","size":1, "imports":["Sophie Løhde","Mette Hjermind Dencker","Rasmus Horn Langhoff","Karen J. Klint","Finn Thranum","Eigil Andersen","Liv Holm Andersen","Karina Adsbøl","Hans Andersen","Per Clausen","Liselott Blixt","Annette Lind","Julie Skovsby","Mai Mercado","Thyra Frank","Jane Heitmann","Jonas Dahl","Camilla Hersom","Eyvind Vesselbo","Özlem Sara Cekic","Marlene Borst Hansen","Martin Geertsen","Flemming Møller Mortensen","Anne Sina","Jens Henrik Thulesen Dahl","Simon Emil Ammitzbøll","Orla Hav","Stine Brix","Hans Christian Schmidt"]},
+{"name": "Astrid Krag","size":1, "imports":[]},
+{"name": "Christian Juhl","size":1, "imports":[]},
+{"name": "Transportudvalget","size":1, "imports":["Rasmus Prehn","Rasmus Horn Langhoff","Thomas Danielsen","Ida Auken","Villum Christensen","Lone Loklindt","Lars Dohn","Per Clausen","Henning Hyllested","Anita Christensen","Flemming Damgaard Larsen","Karsten Nonbo","Kristian Pihl Lorentzen","Tom Behnke","Mette Reissmann","Jens Joel","Martin Geertsen","Lars Christian Lilleholt","Mike Legarth","Morten Marinus","Anne Sina","Leif Mikkelsen","Orla Hav","Karina Lorentzen Dehnhardt","Kim Christiansen","Hans Christian Schmidt"]},
+{"name": "Henning Hyllested","size":1, "imports":[]},
+{"name": "Peter Skaarup","size":1, "imports":[]},
+{"name": "Erling Bonnesen","size":1, "imports":[]},
+{"name": "Liselott Blixt","size":1, "imports":[]},
+{"name": "Udvalget for Fødevarer, Landbrug og Fiskeri","size":1, "imports":["Esben Lunde Larsen","Mette Hjermind Dencker","Henning Hyllested","Thomas Danielsen","Helle Løvgreen Mølvig","Tina Nedergaard","Lone Loklindt","Lars Dohn","Per Clausen","Pernille Rosenkrantz-Theil","Jacob Jensen","Anita Christensen","Erling Bonnesen","Mette Reissmann","Simon Kollerup","Mette Bock","Henrik Høegh","Jesper Petersen","René Christensen","Jan E. Jørgensen","Charlotte Dyremose","Trine Mach","Orla Hav","Dennis Flydtkjær","Karina Lorentzen Dehnhardt","Hans Christian Schmidt"]},
+{"name": "Kulturudvalget","size":1, "imports":["Leif Lahn Jensen","Mette Bock","Rasmus Prehn","Eva Kjer Hansen","Alex Ahrendtsen","Lars Barfoed","Lone Loklindt","Jan Johansen","Holger K. Nielsen","Ellen Trane Nørby","Anni Matthiesen","Michael Aastrup Jensen","Annette Vilhelmsen","Zenia Stampe","Flemming Damgaard Larsen","Pernille Skipper","Brian Mikkelsen","Troels Ravn","Özlem Sara Cekic","Marlene Borst Hansen","Jørgen Arbo-Bæhr","Flemming Møller Mortensen","Ole Sohn","Morten Marinus","Eyvind Vesselbo","Pia Kjærsgaard","Kim Andersen"]},
+{"name": "Jakob Engel-Schmidt","size":1, "imports":[]},
+{"name": "Beskæftigelsesudvalget","size":1, "imports":["Leif Lahn Jensen","Jørgen Arbo-Bæhr","Claus Hjort Frederiksen","Nadeem Farooq","Eigil Andersen","Jan Johansen","Hans Andersen","Christian Juhl","Pernille Rosenkrantz-Theil","Louise Schack Elholm","Jens Ejner Christensen","Peter Juel Jensen","Ane Halsboe-Jørgensen","Bent Bøgsted","Lennart Damsbo-Andersen","Jakob Engel-Schmidt","Mai Mercado","Fatma Øktem","Jens Joel","Finn Sørensen","Pia Adelsteen","Peter Christensen","René Christensen","Joachim B. Olsen","Jens Henrik Thulesen Dahl","Özlem Sara Cekic"]},
+{"name": "Annette Vilhelmsen","size":1, "imports":[]},
+{"name": "Miljøudvalget","size":1, "imports":["Anne-Mette Winther Christiansen","Esben Lunde Larsen","Mette Hjermind Dencker","Villum Christensen","Lone Loklindt","John Dyrby Paulsen","Torben Hansen","Anni Matthiesen","Per Clausen","Erling Bonnesen","Hans Christian Thoning","Annette Lind","Lars Dohn","Mette Reissmann","Simon Kollerup","Hans Kristian Skibby","Eyvind Vesselbo","Jens Joel","Lisbeth Bech Poulsen","Pia Adelsteen","Henrik Høegh","Flemming Møller Mortensen","Uffe Elbæk","René Christensen","Charlotte Dyremose","Lotte Rod","Hans Christian Schmidt"]},
+{"name": "Flemming Damgaard Larsen","size":1, "imports":[]},
+{"name": "Nikolaj Villumsen","size":1, "imports":[]},
+{"name": "Pernille Skipper","size":1, "imports":[]},
+{"name": "Martin Henriksen","size":1, "imports":[]},
+{"name": "Tom Behnke","size":1, "imports":[]},
+{"name": "Karen Ellemann","size":1, "imports":[]},
+{"name": "Merete Riisager","size":1, "imports":[]},
+{"name": "Mette Reissmann","size":1, "imports":[]},
+{"name": "Jeppe Mikkelsen","size":1, "imports":[]},
+{"name": "Udvalget for Udlændinge- og Integrationspolitik","size":1, "imports":["Marlene Borst Hansen","Karen J. Klint","Johanne Schmidt-Nielsen","Anders Samuelsen","Karsten Lauritzen","Peter Skaarup","Michael Aastrup Jensen","Inger Støjberg","Lennart Damsbo-Andersen","Jakob Engel-Schmidt","Zenia Stampe","Fatma Øktem","Pernille Vigsø Bagge","Pernille Skipper","Martin Henriksen","Tom Behnke","Karen Ellemann","Mette Reissmann","Marie Krarup","Christian Langballe","Troels Ravn","Jeppe Bruus","Jørgen Arbo-Bæhr","Martin Geertsen","Anne Sina","Karen Jespersen","Lotte Rod","Trine Bramsen","Karina Lorentzen Dehnhardt"]},
+{"name": "Kristian Thulesen Dahl","size":1, "imports":[]},
+{"name": "Marie Krarup","size":1, "imports":[]},
+{"name": "Christian Langballe","size":1, "imports":[]},
+{"name": "Torsten Schack Pedersen","size":1, "imports":[]},
+{"name": "Mads Rørvig","size":1, "imports":[]},
+{"name": "Hans Kristian Skibby","size":1, "imports":[]},
+{"name": "Brian Mikkelsen","size":1, "imports":[]},
+{"name": "Troels Ravn","size":1, "imports":[]},
+{"name": "Özlem Sara Cekic","size":1, "imports":[]},
+{"name": "Marlene Borst Hansen","size":1, "imports":[]},
+{"name": "Finn Sørensen","size":1, "imports":[]},
+{"name": "Martin Geertsen","size":1, "imports":[]},
+{"name": "By- og Boligudvalget","size":1, "imports":["Ida Auken","Alex Ahrendtsen","Karsten Lauritzen","Eigil Andersen","Lars Dohn","Jan Johansen","Liv Holm Andersen","Karina Adsbøl","Michael Aastrup Jensen","Nadeem Farooq","Fatma Øktem","Jane Heitmann","Thomas Jensen","Mette Reissmann","Simon Kollerup","Jens Joel","Martin Geertsen","Lisbeth Bech Poulsen","Louise Schack Elholm","Ole Birk Olesen","Morten Marinus","Charlotte Dyremose","Karen Jespersen","Rosa Lund","Orla Hav","Dennis Flydtkjær","Özlem Sara Cekic","Preben Bang Henriksen"]},
+{"name": "Louise Schack Elholm","size":1, "imports":[]},
+{"name": "Peter Christensen","size":1, "imports":[]},
+{"name": "Mike Legarth","size":1, "imports":[]},
+{"name": "Jesper Petersen","size":1, "imports":[]},
+{"name": "René Christensen","size":1, "imports":[]},
+{"name": "Ole Birk Olesen","size":1, "imports":[]},
+{"name": "Morten Marinus","size":1, "imports":[]},
+{"name": "Jan E. Jørgensen","size":1, "imports":[]},
+{"name": "Anne Sina","size":1, "imports":[]},
+{"name": "Kommunaludvalget","size":1, "imports":["Sophie Løhde","Mette Hjermind Dencker","Rasmus Prehn","Helle Løvgreen Mølvig","Mikkel Dencker","Finn Thranum","Lars Dohn","Jan Johansen","Liv Holm Andersen","Jacob Jensen","Anita Christensen","Erling Bonnesen","Michael Aastrup Jensen","Hans Christian Thoning","Annette Lind","Nadeem Farooq","Torben Hansen","Pernille Vigsø Bagge","Thomas Jensen","Simon Kollerup","Finn Sørensen","Martin Geertsen","Lisbeth Bech Poulsen","Mike Legarth","Ole Birk Olesen","Morten Marinus","Jan E. Jørgensen","Anne Sina","Rosa Lund"]},
+{"name": "Charlotte Dyremose","size":1, "imports":[]},
+{"name": "Trine Mach","size":1, "imports":[]},
+{"name": "Rosa Lund","size":1, "imports":[]},
+{"name": "Joachim B. Olsen","size":1, "imports":[]},
+{"name": "Lotte Rod","size":1, "imports":[]},
+{"name": "Jens Henrik Thulesen Dahl","size":1, "imports":[]},
+{"name": "Uddannelses- og Forskningsudvalget","size":1, "imports":["Bertel Haarder","Anne-Mette Winther Christiansen","Esben Lunde Larsen","Rasmus Prehn","Kristian Jensen","Ole Hækkerup","Alex Ahrendtsen","Lene Espersen","Tina Nedergaard","Villum Christensen","Liv Holm Andersen","Annette Vilhelmsen","Pernille Vigsø Bagge","Pernille Skipper","Karen Ellemann","Merete Riisager","Mette Reissmann","Jeppe Mikkelsen","Jonas Dahl","Marie Krarup","Christian Langballe","Simon Kollerup","Mads Rørvig","Jeppe Bruus","Jesper Petersen","Rosa Lund","Lotte Rod","Jens Henrik Thulesen Dahl","Trine Bramsen"]},
+{"name": "Simon Emil Ammitzbøll","size":1, "imports":[]},
+{"name": "Trine Bramsen","size":1, "imports":[]},
+{"name": "Dennis Flydtkjær","size":1, "imports":[]},
+{"name": "Karina Lorentzen Dehnhardt","size":1, "imports":[]},
+{"name": "Stine Brix","size":1, "imports":[]},
+{"name": "Kim Christiansen","size":1, "imports":[]},
+{"name": "Hans Christian Schmidt","size":1, "imports":[]},
+{"name": "Kim Andersen","size":1, "imports":[]},
+{"name": "Preben Bang Henriksen","size":1, "imports":[]},
+{"name": "Udvalget for Forretningsordenen","size":1, "imports":["Flemming Damgaard Larsen","Torben Hansen","Søren Espersen","John Dyrby Paulsen","Bertel Haarder","Lone Loklindt","Birthe Rønn Hornbech","Jonas Dahl","Ole Hækkerup","Kristian Jensen","Peter Skaarup","Camilla Hersom","Mogens Lykketoft","Brian Mikkelsen","Simon Emil Ammitzbøll","Henrik Dam Kristensen","Karen J. Klint","Stine Brix","Pia Kjærsgaard","Hans Christian Schmidt"]},
+{"name": "Bertel Haarder","size":1, "imports":[]},
+{"name": "Sophie Løhde","size":1, "imports":[]},
+{"name": "Lene Espersen","size":1, "imports":[]},
+{"name": "Søren Pind","size":1, "imports":[]},
+{"name": "John Dyrby Paulsen","size":1, "imports":[]},
+{"name": "Mette Bock","size":1, "imports":[]},
+{"name": "Thomas Danielsen","size":1, "imports":[]},
+{"name": "Socialudvalget","size":1, "imports":["Sophie Løhde","Anne-Mette Winther Christiansen","Karen J. Klint","Finn Thranum","Liv Holm Andersen","Karina Adsbøl","Hans Andersen","Astrid Krag","Pernille Rosenkrantz-Theil","Julie Skovsby","Mai Mercado","Thyra Frank","Pernille Vigsø Bagge","Pernille Skipper","Karen Ellemann","Merete Riisager","Mette Reissmann","Eyvind Vesselbo","Jens Joel","Marlene Borst Hansen","Finn Sørensen","Louise Schack Elholm","René Christensen","Lotte Rod","Jens Henrik Thulesen Dahl","Orla Hav","Karina Lorentzen Dehnhardt","Özlem Sara Cekic"]},
+{"name": "Johanne Schmidt-Nielsen","size":1, "imports":[]},
+{"name": "Anders Samuelsen","size":1, "imports":[]},
+{"name": "Lars Barfoed","size":1, "imports":[]},
+{"name": "Ida Auken","size":1, "imports":[]},
+{"name": "Per Stig Møller","size":1, "imports":[]},
+{"name": "Villum Christensen","size":1, "imports":[]},
+{"name": "Lone Loklindt","size":1, "imports":[]},
+{"name": "Eigil Andersen","size":1, "imports":[]},
+{"name": "Lars Dohn","size":1, "imports":[]},
+{"name": "Jan Johansen","size":1, "imports":[]},
+{"name": "Liv Holm Andersen","size":1, "imports":[]},
+{"name": "Karina Adsbøl","size":1, "imports":[]},
+{"name": "Ellen Trane Nørby","size":1, "imports":[]},
+{"name": "Hans Andersen","size":1, "imports":[]},
+{"name": "Anni Matthiesen","size":1, "imports":[]},
+{"name": "Klima-, Energi- og Bygningsudvalget","size":1, "imports":["Frank Aaen","Thomas Danielsen","Villum Christensen","Lone Loklindt","Lars Dohn","Ellen Trane Nørby","Per Clausen","Pernille Rosenkrantz-Theil","Jacob Jensen","Jacob Lund","Jens Ejner Christensen","Liselott Blixt","Julie Skovsby","Mike Legarth","Kristian Pihl Lorentzen","Eyvind Vesselbo","Jens Joel","Mikkel Dencker","Lars Christian Lilleholt","Flemming Møller Mortensen","Jesper Petersen","René Christensen","Charlotte Dyremose","Lotte Rod","Kim Christiansen"]},
+{"name": "Per Clausen","size":1, "imports":[]},
+{"name": "Pernille Rosenkrantz-Theil","size":1, "imports":[]},
+{"name": "Jacob Jensen","size":1, "imports":[]},
+{"name": "Udvalget til Valgs Prøvelse","size":1, "imports":["Mike Legarth","Mette Gjerskov","Frank Aaen","Thomas Jensen","Peter Christensen","Torsten Schack Pedersen","Camilla Hersom","Hans Kristian Skibby","Hans Christian Thoning","Peter Juel Jensen","Leif Mikkelsen","Bent Bøgsted","Karen J. Klint","Karina Lorentzen Dehnhardt","Julie Skovsby","Ane Halsboe-Jørgensen","Pernille Skipper"]},
+{"name": "Michael Aastrup Jensen","size":1, "imports":[]},
+{"name": "Hans Christian Thoning","size":1, "imports":[]},
+{"name": "Peter Juel Jensen","size":1, "imports":[]},
+{"name": "Annette Lind","size":1, "imports":[]},
+{"name": "Inger Støjberg","size":1, "imports":[]},
+{"name": "Bent Bøgsted","size":1, "imports":[]},
+{"name": "Lennart Damsbo-Andersen","size":1, "imports":[]},
+{"name": "Nadeem Farooq","size":1, "imports":[]},
+{"name": "Julie Skovsby","size":1, "imports":[]},
+{"name": "Mai Mercado","size":1, "imports":[]},
+{"name": "Thyra Frank","size":1, "imports":[]},
+{"name": "Zenia Stampe","size":1, "imports":[]},
+{"name": "Fatma Øktem","size":1, "imports":[]},
+{"name": "Karsten Nonbo","size":1, "imports":[]},
+{"name": "Kristian Pihl Lorentzen","size":1, "imports":[]},
+{"name": "Pernille Vigsø Bagge","size":1, "imports":[]},
+{"name": "Mette Gjerskov","size":1, "imports":[]},
+{"name": "Anne Baastrup","size":1, "imports":[]},
+{"name": "Jane Heitmann","size":1, "imports":[]},
+{"name": "Thomas Jensen","size":1, "imports":[]},
+{"name": "Jonas Dahl","size":1, "imports":[]},
+{"name": "Troels Lund Poulsen","size":1, "imports":[]},
+{"name": "Jakob Ellemann-Jensen","size":1, "imports":[]},
+{"name": "Simon Kollerup","size":1, "imports":[]},
+{"name": "Camilla Hersom","size":1, "imports":[]},
+{"name": "Birgitte Josefsen","size":1, "imports":[]},
+{"name": "Eyvind Vesselbo","size":1, "imports":[]},
+{"name": "Jens Joel","size":1, "imports":[]},
+{"name": "Jeppe Bruus","size":1, "imports":[]},
+{"name": "Jørgen Arbo-Bæhr","size":1, "imports":[]},
+{"name": "Mikkel Dencker","size":1, "imports":[]},
+{"name": "Lars Christian Lilleholt","size":1, "imports":[]},
+{"name": "Lisbeth Bech Poulsen","size":1, "imports":[]},
+{"name": "Morten Bødskov","size":1, "imports":[]},
+{"name": "Pia Adelsteen","size":1, "imports":[]},
+{"name": "Udvalget for Landdistrikter og Øer","size":1, "imports":["Esben Lunde Larsen","Mette Hjermind Dencker","Eva Kjer Hansen","Thomas Danielsen","Helle Løvgreen Mølvig","Eigil Andersen","John Dyrby Paulsen","Karina Adsbøl","Anni Matthiesen","Henning Hyllested","Jacob Lund","Erling Bonnesen","Annette Lind","Bent Bøgsted","Lennart Damsbo-Andersen","Lars Dohn","Mai Mercado","Flemming Damgaard Larsen","Torsten Schack Pedersen","Troels Ravn","Simon Kollerup","Morten Marinus","Lotte Rod","Leif Mikkelsen","Hans Christian Schmidt"]},
+{"name": "Henrik Høegh","size":1, "imports":[]},
+{"name": "Flemming Møller Mortensen","size":1, "imports":[]},
+{"name": "Uffe Elbæk","size":1, "imports":[]},
+{"name": "Ole Sohn","size":1, "imports":[]},
+{"name": "Kirkeudvalget","size":1, "imports":["Bertel Haarder","Leif Lahn Jensen","Mette Bock","Charlotte Dyremose","Rasmus Horn Langhoff","Ole Hækkerup","Karen J. Klint","Søren Pind","Eigil Andersen","Søren Espersen","Per Clausen","Erling Bonnesen","Julie Skovsby","Flemming Damgaard Larsen","Kristian Pihl Lorentzen","Pernille Vigsø Bagge","Jeppe Mikkelsen","Marie Krarup","Christian Langballe","Camilla Hersom","Birgitte Josefsen","Marlene Borst Hansen","Jørgen Arbo-Bæhr","Flemming Møller Mortensen","Morten Marinus","Birthe Rønn Hornbech","Rosa Lund","Orla Hav","Hans Christian Schmidt"]},
+{"name": "Leif Mikkelsen","size":1, "imports":[]},
+{"name": "Orla Hav","size":1, "imports":[]},
+{"name": "Edmund Joensen","size":1, "imports":[]},
+{"name": "Tingsekretærer","size":1, "imports":["Karen J. Klint","Lars Christian Lilleholt","John Dyrby Paulsen","Bent Bøgsted"]},
+{"name": "Pia Kjærsgaard","size":1, "imports":[]},
+{"name": "Anne-Mette Winther Christiansen","size":1, "imports":[]},
+{"name": "Leif Lahn Jensen","size":1, "imports":[]},
+{"name": "Esben Lunde Larsen","size":1, "imports":[]},
+{"name": "Sjúrður Skaale","size":1, "imports":[]},
+{"name": "Mette Hjermind Dencker","size":1, "imports":[]},
+{"name": "Rasmus Prehn","size":1, "imports":[]},
+{"name": "Eva Kjer Hansen","size":1, "imports":[]},
+{"name": "Rasmus Horn Langhoff","size":1, "imports":[]},
+{"name": "Ligestillingsudvalget","size":1, "imports":["Rasmus Prehn","Rasmus Horn Langhoff","Johanne Schmidt-Nielsen","Finn Thranum","Liv Holm Andersen","Astrid Krag","Pernille Rosenkrantz-Theil","Louise Schack Elholm","Karen Ellemann","Liselott Blixt","Inger Støjberg","Lennart Damsbo-Andersen","Jakob Engel-Schmidt","Zenia Stampe","Fatma Øktem","Martin Henriksen","Jane Heitmann","Merete Riisager","Mads Rørvig","Hans Kristian Skibby","Troels Ravn","Özlem Sara Cekic","Marlene Borst Hansen","Jørgen Arbo-Bæhr","Pia Adelsteen","Charlotte Dyremose","Karina Lorentzen Dehnhardt","Stine Brix"]},
+{"name": "Helle Løvgreen Mølvig","size":1, "imports":[]},
+{"name": "Claus Hjort Frederiksen","size":1, "imports":[]},
+{"name": "Kristian Jensen","size":1, "imports":[]},
+{"name": "Ole Hækkerup","size":1, "imports":[]},
+{"name": "Tina Nedergaard","size":1, "imports":[]},
+{"name": "Karen J. Klint","size":1, "imports":[]},
+{"name": "Finn Thranum","size":1, "imports":[]},
+{"name": "Indfødsretsudvalget","size":1, "imports":["Liv Holm Andersen","Leif Mikkelsen","Jeppe Bruus","Jan E. Jørgensen","Karsten Nonbo","Tom Behnke","Marie Krarup","Christian Langballe","Karen J. Klint","Michael Aastrup Jensen","Johanne Schmidt-Nielsen","Jens Joel","Trine Bramsen","Lennart Damsbo-Andersen","Karina Lorentzen Dehnhardt","Marlene Borst Hansen","Preben Bang Henriksen"]},
+{"name": "Ane Halsboe-Jørgensen","size":1, "imports":[]},
+{"name": "Torben Hansen","size":1, "imports":[]},
+{"name": "Færøudvalget","size":1, "imports":["Sophie Løhde","Sjúrður Skaale","Rasmus Prehn","Thomas Danielsen","Helle Løvgreen Mølvig","Claus Hjort Frederiksen","Per Stig Møller","Finn Thranum","Villum Christensen","Lone Loklindt","Torben Hansen","Søren Espersen","Astrid Krag","Christian Juhl","Nadeem Farooq","Flemming Damgaard Larsen","Martin Henriksen","Thomas Jensen","Kristian Thulesen Dahl","Marie Krarup","Jonas Dahl","Özlem Sara Cekic","Finn Sørensen","Flemming Møller Mortensen","Jesper Petersen","Birthe Rønn Hornbech","Trine Mach","Edmund Joensen","Kim Andersen"]},
+{"name": "Doris Jakobsen","size":1, "imports":[]},
+{"name": "Anita Christensen","size":1, "imports":[]},
+{"name": "Jacob Lund","size":1, "imports":[]},
+{"name": "Jens Ejner Christensen","size":1, "imports":[]},
+{"name": "Tilsynet med Folketingets Bibliotek","size":1, "imports":["Birthe Rønn Hornbech","Troels Ravn"]},
+{"name": "Henrik Dam Kristensen","size":1, "imports":[]},
+{"name": "Birthe Rønn Hornbech","size":1, "imports":[]},
+{"name": "Karen Jespersen","size":1, "imports":[]},
+{"name": "Underudvalget under Udvalget for Forretningsordenen","size":1, "imports":["Henrik Dam Kristensen","Anne Baastrup","Kristian Jensen","Peter Skaarup","Brian Mikkelsen","Simon Emil Ammitzbøll","Stine Brix","Lone Loklindt"]},
+{"name": "Udvalget for Småøer","size":1, "imports":["Flemming Damgaard Larsen","Mette Hjermind Dencker","Thomas Danielsen","Henning Hyllested","Hans Christian Schmidt","Simon Kollerup","Lennart Damsbo-Andersen","Mai Mercado","Eigil Andersen"]},
+{"name": "Tilsynet i henhold til grundlovens § 71","size":1, "imports":["Orla Hav","Jane Heitmann","Karen Jespersen","Liselott Blixt","Özlem Sara Cekic","Marlene Borst Hansen","Karen J. Klint","Stine Brix","Thyra Frank"]},
+{"name": "Europaudvalgets Underudvalg","size":1, "imports":["Nikolaj Villumsen","Mette Bock","Eva Kjer Hansen","Mette Reissmann","Camilla Hersom","Per Stig Møller","Lisbeth Bech Poulsen","Pia Adelsteen"]},
+{"name": "Mogens Lykketoft","size":1, "imports":[]}];
+
+var w = 1280,
+    h = 800,
+    rx = w / 2,
+    ry = h / 2,
+    m0,
+    rotate = 0;
+// Chrome 15 bug: <http://code.google.com/p/chromium/issues/detail?id=98951>
+var div = d3.select("body").insert("div", "h2")
+    .style("top", "0px")
+    .style("left", "0px")
+    .style("width", w + "px")
+    .style("height", w + "px")
+    .style("position", "absolute")
+    .style("-webkit-backface-visibility", "hidden");
+
+var svg = div.append("svg:svg")
+    .attr("width", w)
+    .attr("height", w)
+  .append("svg:g")
+    .attr("transform", "translate(" + rx + "," + ry + ")");
+
+var force = d3.layout.force()
+	.nodes(nodes)
+	.size([300,300])
+	.on("tick",tick);
+
+
+
+node = svg.selectAll("circle")
+	.data(force.nodes())
+	.enter().append("circle")
+	.style("fill", "steelblue")
+	.attr("r", 10);
+
+function tick() {
+	node.attr("cx", function(d) { return d.x; })
+	    .attr("cy", function(d) { return d.y; });
+}
+
+force.start();
+
+</script>
+</body>
+</html>
